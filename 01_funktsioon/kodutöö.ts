@@ -1,14 +1,11 @@
 //Ruutvõrrandi lahendamise funktsioon
 
 function quadraticEquation(a:number, b:number, c:number){
-    let lahendus1:number = (-b+Math.sqrt((b*b-4*a*c)))/(2*a)
-    let lahendus2:number = (-b-Math.sqrt((b*b-4*a*c)))/(2*a)
+    let lahendus1:number = (-b+Math.sqrt((b*b-4*a*c)))/(2*a);
+    let lahendus2:number = (-b-Math.sqrt((b*b-4*a*c)))/(2*a);
 
-    if(isNaN(lahendus1)){
-        console.log("Esimesel x-il pole lahendust");
-    }
-    if(isNaN(lahendus2)){
-        console.log("Teisel x-il pole lahendust");
+    if(isNaN(lahendus1) || isNaN(lahendus2)){
+        console.log("Lahendus puudub");
     }
     if(lahendus1 == lahendus2){
         console.log("X on " + lahendus1);

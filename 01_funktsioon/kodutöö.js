@@ -2,11 +2,8 @@
 function quadraticEquation(a, b, c) {
     var lahendus1 = (-b + Math.sqrt((b * b - 4 * a * c))) / (2 * a);
     var lahendus2 = (-b - Math.sqrt((b * b - 4 * a * c))) / (2 * a);
-    if (isNaN(lahendus1)) {
-        console.log("Esimesel x-il pole lahendust");
-    }
-    if (isNaN(lahendus2)) {
-        console.log("Teisel x-il pole lahendust");
+    if (isNaN(lahendus1) || isNaN(lahendus2)) {
+        console.log("Lahendus puudub");
     }
     if (lahendus1 == lahendus2) {
         console.log("X on " + lahendus1);
