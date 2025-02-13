@@ -1,5 +1,5 @@
 class pangaKonto{
-    constructor(public isik:string, public summa:number){}
+    constructor(protected isik:string, protected summa:number){}
     static kasutajad: pangaKonto[] = [];
 
     static kõikKasutajad(){
@@ -22,10 +22,37 @@ class pangaKonto{
         }
     }
 
+    rahaSisse(isikuNimi:string, arv:number){
+        const konto = pangaKonto.kasutajad.find(konto => konto.isik === isikuNimi)
+        if(konto){
+            konto.summa += arv
+        }
+        console.log("Kontole " + isikuNimi + " lisati " + arv + " eurot")
+    }
+
+    rahaVälja(isikuNimi:string, arv:number){
+        const konto = pangaKonto.kasutajad.find(konto => konto.isik === isikuNimi)
+        if(konto){
+            konto.summa -= arv
+        }
+        console.log("Kontolt " + isikuNimi + " võeti " + arv + " eurot")
+    }
+
 }
 
 const konto = new pangaKonto("kasutaja", 0.0);
+
 konto.looKasutaja("Timmu");
+//konto.looKasutaja("Mimmu");
+
 konto.väljaVõte("Timmu");
 konto.väljaVõte("Mimmu");
+
 pangaKonto.kõikKasutajad();
+
+konto.rahaSisse("Timmu", 20);
+konto.väljaVõte("Timmu");
+
+konto.rahaVälja("Timmu", 20);
+konto.väljaVõte("Timmu");
+

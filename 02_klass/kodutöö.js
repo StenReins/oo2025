@@ -20,11 +20,30 @@ var pangaKonto = /** @class */ (function () {
             console.log("Kasutajat ei leitud :(");
         }
     };
+    pangaKonto.prototype.rahaSisse = function (isikuNimi, arv) {
+        var konto = pangaKonto.kasutajad.find(function (konto) { return konto.isik === isikuNimi; });
+        if (konto) {
+            konto.summa += arv;
+        }
+        console.log("Kontole " + isikuNimi + " lisati " + arv + " eurot");
+    };
+    pangaKonto.prototype.rahaVälja = function (isikuNimi, arv) {
+        var konto = pangaKonto.kasutajad.find(function (konto) { return konto.isik === isikuNimi; });
+        if (konto) {
+            konto.summa -= arv;
+        }
+        console.log("Kontolt " + isikuNimi + " võeti " + arv + " eurot");
+    };
     pangaKonto.kasutajad = [];
     return pangaKonto;
 }());
 var konto = new pangaKonto("kasutaja", 0.0);
 konto.looKasutaja("Timmu");
+//konto.looKasutaja("Mimmu");
 konto.väljaVõte("Timmu");
 konto.väljaVõte("Mimmu");
 pangaKonto.kõikKasutajad();
+konto.rahaSisse("Timmu", 20);
+konto.väljaVõte("Timmu");
+konto.rahaVälja("Timmu", 20);
+konto.väljaVõte("Timmu");
