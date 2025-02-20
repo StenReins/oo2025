@@ -12,7 +12,7 @@ class pangaKonto{
         console.log("Loodud konto: " + uusKonto.isik);
     }
 
-    väljaVõte(isikuNimi:string): void{
+    väljavõte(isikuNimi:string): void{
         const konto = pangaKonto.kasutajad.find(konto => konto.isik === isikuNimi);
         if(konto){
             console.log(konto.isik + ": " + konto.summa + " eurot");
@@ -45,14 +45,14 @@ const konto = new pangaKonto("kasutaja", 0.0);
 konto.looKasutaja("Timmu");
 //konto.looKasutaja("Mimmu");
 
-konto.väljaVõte("Timmu");
-konto.väljaVõte("Mimmu");
+konto.väljavõte("Timmu");
+konto.väljavõte("Mimmu");
 
 pangaKonto.kõikKasutajad();
 
 konto.rahaSisse("Timmu", 20);
-konto.väljaVõte("Timmu");
+konto.väljavõte("Timmu");
 
 konto.rahaVälja("Timmu", 20);
-konto.väljaVõte("Timmu");
+konto.väljavõte("Timmu");
 

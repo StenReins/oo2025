@@ -20,7 +20,7 @@ class Potentsiomeeter{
     }
 }
 
-let p1:Potentsiomeeter = new Potentsiomeeter(-120, 120, 100, 500);
+let p1 = new Potentsiomeeter(-120, 120, 100, 500);
 p1.muudaNurk(110);
 console.log(p1);
 console.log(p1.getR())

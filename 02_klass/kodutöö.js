@@ -11,7 +11,7 @@ var pangaKonto = /** @class */ (function () {
         pangaKonto.kasutajad.push(uusKonto);
         console.log("Loodud konto: " + uusKonto.isik);
     };
-    pangaKonto.prototype.väljaVõte = function (isikuNimi) {
+    pangaKonto.prototype.väljavõte = function (isikuNimi) {
         var konto = pangaKonto.kasutajad.find(function (konto) { return konto.isik === isikuNimi; });
         if (konto) {
             console.log(konto.isik + ": " + konto.summa + " eurot");
@@ -40,10 +40,10 @@ var pangaKonto = /** @class */ (function () {
 var konto = new pangaKonto("kasutaja", 0.0);
 konto.looKasutaja("Timmu");
 //konto.looKasutaja("Mimmu");
-konto.väljaVõte("Timmu");
-konto.väljaVõte("Mimmu");
+konto.väljavõte("Timmu");
+konto.väljavõte("Mimmu");
 pangaKonto.kõikKasutajad();
 konto.rahaSisse("Timmu", 20);
-konto.väljaVõte("Timmu");
+konto.väljavõte("Timmu");
 konto.rahaVälja("Timmu", 20);
-konto.väljaVõte("Timmu");
+konto.väljavõte("Timmu");
