@@ -27,7 +27,7 @@ class pangaKonto{
         if(konto){
             konto.summa += arv
         }
-        console.log("Kontole " + isikuNimi + " lisati " + arv + " eurot")
+        console.log("Kontole " + isikuNimi + " lisati " + arv + " eurot");
     }
 
     rahaVälja(isikuNimi:string, arv:number){
@@ -35,7 +35,7 @@ class pangaKonto{
         if(konto){
             konto.summa -= arv
         }
-        console.log("Kontolt " + isikuNimi + " võeti " + arv + " eurot")
+        console.log("Kontolt " + isikuNimi + " võeti " + arv + " eurot");
     }
 
 }

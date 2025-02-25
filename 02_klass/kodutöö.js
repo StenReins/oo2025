@@ -1,43 +1,44 @@
-var pangaKonto = /** @class */ (function () {
-    function pangaKonto(isik, summa) {
+class pangaKonto {
+    isik;
+    summa;
+    constructor(isik, summa) {
         this.isik = isik;
         this.summa = summa;
     }
-    pangaKonto.kõikKasutajad = function () {
+    static kasutajad = [];
+    static kõikKasutajad() {
         console.log(pangaKonto.kasutajad);
-    };
-    pangaKonto.prototype.looKasutaja = function (isikuNimi) {
-        var uusKonto = new pangaKonto(isikuNimi, 0.00);
+    }
+    looKasutaja(isikuNimi) {
+        let uusKonto = new pangaKonto(isikuNimi, 0.00);
         pangaKonto.kasutajad.push(uusKonto);
         console.log("Loodud konto: " + uusKonto.isik);
-    };
-    pangaKonto.prototype.väljavõte = function (isikuNimi) {
-        var konto = pangaKonto.kasutajad.find(function (konto) { return konto.isik === isikuNimi; });
+    }
+    väljavõte(isikuNimi) {
+        const konto = pangaKonto.kasutajad.find(konto => konto.isik === isikuNimi);
         if (konto) {
             console.log(konto.isik + ": " + konto.summa + " eurot");
         }
         else {
             console.log("Kasutajat ei leitud :(");
         }
-    };
-    pangaKonto.prototype.rahaSisse = function (isikuNimi, arv) {
-        var konto = pangaKonto.kasutajad.find(function (konto) { return konto.isik === isikuNimi; });
+    }
+    rahaSisse(isikuNimi, arv) {
+        const konto = pangaKonto.kasutajad.find(konto => konto.isik === isikuNimi);
         if (konto) {
             konto.summa += arv;
         }
         console.log("Kontole " + isikuNimi + " lisati " + arv + " eurot");
-    };
-    pangaKonto.prototype.rahaVälja = function (isikuNimi, arv) {
-        var konto = pangaKonto.kasutajad.find(function (konto) { return konto.isik === isikuNimi; });
+    }
+    rahaVälja(isikuNimi, arv) {
+        const konto = pangaKonto.kasutajad.find(konto => konto.isik === isikuNimi);
         if (konto) {
             konto.summa -= arv;
         }
         console.log("Kontolt " + isikuNimi + " võeti " + arv + " eurot");
-    };
-    pangaKonto.kasutajad = [];
-    return pangaKonto;
-}());
-var konto = new pangaKonto("kasutaja", 0.0);
+    }
+}
+const konto = new pangaKonto("kasutaja", 0.0);
 konto.looKasutaja("Timmu");
 //konto.looKasutaja("Mimmu");
 konto.väljavõte("Timmu");
