@@ -1,17 +1,21 @@
-var Ülesanne = /** @class */ (function () {
-    function Ülesanne(eesnimi, ülesanne, ülesandekirjeldus, kategooria) {
-        this.eesnimi = eesnimi;
-        this.ülesanne = ülesanne;
-        this.ülesandekirjeldus = ülesandekirjeldus;
-        this.kategooria = kategooria;
-        this.ülesanded = [];
-    }
-    Ülesanne.prototype.submitEntry = function () {
-        eesnimi = document.querySelector('eesNimi');
-        ülesanne = document.querySelector('ülesanne');
-        ülesandekirjeldus = document.querySelector('ülesandeKirjeldus');
-        kategooria = document.querySelector('kategooria');
-        ülesanded.push(eesnimi, ülesanne, ülesandekirjeldus, kategooria);
+var tasks = [];
+var result = "";
+function submitEntry() {
+    var eesnimi = document.getElementById('eesNimi');
+    var ülesanne = document.getElementById('ülesanne');
+    var kirjeldus = document.getElementById('ülesandeKirjeldus');
+    var kategooria = document.getElementById('kategooria');
+    var task = {
+        eesnimi: eesnimi.value,
+        ülesanne: ülesanne.value,
+        kirjeldus: kirjeldus.value,
+        kategooria: kategooria.value
     };
-    return Ülesanne;
-}());
+    addTaskToList(task);
+}
+function addTaskToList(task) {
+    var entries = document.getElementById('entries');
+    console.log(task);
+    result += "<li>" + task.eesnimi + " | " + task.ülesanne + " | " + task.kirjeldus + " | " + task.kategooria + "</li>" + "<label for='progress'>Tehtud!</label><input type='checkbox' id='progress'><br><br>";
+    entries.innerHTML = result;
+}

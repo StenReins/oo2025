@@ -4,36 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kodutöö</title>
-    <link rel="stylesheet" href="kodutöö.css"
     <script src="kodutöö.js" defer></script>
 </head>
 <body>
-    <h1>epic to-do list</h1>
-    <br>
-    <h2>Lisa ülesanne</h2>
-    <label for="eesNimi">Eesnimi:</label>
-    <input type="text" id="eesNimi" name="eesNimi"><br><br>
-    <label for="ülesanne">Ülesanne:</label>
-    <input type="text" id="ülesanne" name="Ülesanne"><br><br>
-    <label for="ülesandeKirjeldus">Ülesande kirjeldus:</label>
-    <input type="text" id="ülesandeKirjeldus" name="Ülesande kirjeldus"><br><br>
-    <label for="kategooria">Kategooria:</label>
-    <select name="kategooria" id="kategooria">
-        <option value="infosüsteem">Sissejuhatus infosüsteemidesse</option>
-        <option value="interaktsioonidisain">Interaktsioonidisain</option>
-        <option value="veebjameedia">Veeb ja meediaelemendid</option>
-        <option value="eesrakendus">Eesrakenduste arendamine</option>
-        <option value="ooproge">Objekt-orienteeritud programmeerimine</option>
-    </select>
-    <button type="submit" onclick="submitEntry()">Salvesta</button>
-    <ol>
-        <span id="entries">
-            <script>
-            ülesanded.forEach(ülesanne) => {
-                document.innerText = ülesanne;
-            }
-            </script>
-        </span>
+    <form onsubmit="submitEntry(); return false;">
+        <h1>epic to-do list</h1>
+        <br>
+        <h2>Lisa ülesanne</h2>
+        <label for="eesNimi">Eesnimi:</label>
+        <input type="text" id="eesNimi" name="eesNimi"><br><br>
+        <label for="ülesanne">Ülesanne:</label>
+        <input type="text" id="ülesanne" name="Ülesanne"><br><br>
+        <label for="ülesandeKirjeldus">Ülesande kirjeldus:</label>
+        <input type="text" id="ülesandeKirjeldus" name="Ülesande kirjeldus"><br><br>
+        <label for="kategooria">Kategooria:</label>
+        <select name="kategooria" id="kategooria">
+            <option value="infosüsteem">Sissejuhatus infosüsteemidesse</option>
+            <option value="interaktsioonidisain">Interaktsioonidisain</option>
+            <option value="veebjameedia">Veeb ja meediaelemendid</option>
+            <option value="eesrakendus">Eesrakenduste arendamine</option>
+            <option value="ooproge">Objekt-orienteeritud programmeerimine</option>
+        </select>
+        <br><br>
+        <button type="submit" onsubmit="submitEntry()">Salvesta</button>
+    </form>
+    <ol id="entries">
     </ol>
 </body>
 </html>
