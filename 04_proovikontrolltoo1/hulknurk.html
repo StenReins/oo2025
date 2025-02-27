@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hulknurk</title>
+    <script src="hulknurk.js" defer></script>
+    <script>
+        function startPage(){
+            let punkt1 = new Kolmnurk(400, 100)
+            let punkt2 = new Kolmnurk(240, 10)
+            let punkt3 = new Kolmnurk(240, 200)
+            Kolmnurk.addCoordinates(punkt1);
+            Kolmnurk.addCoordinates(punkt2);
+            Kolmnurk.addCoordinates(punkt3);
+            punkt1.draw(hulknurk.getContext("2d"));
+            punkt2.draw(hulknurk.getContext("2d"));
+            punkt3.draw(hulknurk.getContext("2d"));
+        }
+        
+    </script>
+</head>
+<body onload="startPage()">
+    <canvas id="hulknurk" height="300" width="400"></canvas><br>
+</body>
+</html>
