@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculation</title>
+    <script src="arvutused1.js" defer></script>
+    <script>
+        let calculators = [];
+        function startPage(){
+            calculators[0] = new InchestoCM();
+            calculators[1] = new CMtoInches();
+            activateCalculator();
+        }
+        function activateCalculator(){
+            let type1 = document.getElementById("type1");
+            let type2 = document.getElementById("type2");
+            let answer = document.getElementById("answer");
+            let input = document.getElementById("input");
+            let calculatorSelect = document.getElementById("calculatorSelect");
+
+            type1.innerText = calculators[calculatorSelect.selectedIndex].inputUnit();
+            type2.innerText = calculators[calculatorSelect.selectedIndex].outputUnit();
+            answer.innerText = "";
+            input.value = "";
+        }
+        function buttonClick(){
+            let answer = document.getElementById("answer");
+            let input = document.getElementById("input");
+            let calculatorSelect = document.getElementById("calculatorSelect");
+
+            answer.innerText = calculators[calculatorSelect.selectedIndex].calculate(input.valueAsNumber).toFixed(2);
+        }
+    </script>
+</head>
+<body onload="startPage()">
+    <div>
+        <label for="input">Input</label>
+        <input type="number" id="input" name="input" onchange="buttonClick()">
+        <span id="type1">in</span>
+        <select id="calculatorSelect" onchange="activateCalculator()">
+            <option>In to CM</option>
+            <option>CM to In</option>
+        </select>
+        <button type="submit" id="submit" name="submit" onclick="buttonClick()">=</button>
+        <span id="answer">answer</span>
+        <span id="type2">cm</span>
+    </div>
+</body>
+</html>
