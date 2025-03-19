@@ -29,4 +29,3 @@ class InchestoCM implements CalculatingFunction{
         return "cm";
     }
 }
-

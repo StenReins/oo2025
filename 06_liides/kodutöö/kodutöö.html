@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eww maksud</title>
+    <script src="kodutöö.js" defer></script>
+    <link rel="stylesheet" href="kodutöö.css">
+</head>
+<body>
+    <div id="main">
+        <h1>Käibemaksu kalkulaator ja valuuta vahetus</h1>
+        <br>
+        <label for="riik">Riik</label>
+        <select id="riik">
+            <option value="Austria">Austria</option>
+            <option value="Belgium">Belgium</option>
+            <option value="Bulgaria">Bulgaria</option>
+            <option value="Croatia">Croatia</option>
+            <option value="Cyprus">Cyprus</option>
+            <option value="Czech Republic">Czech Republic</option>
+            <option value="Denmark">Denmark</option>
+            <option value="Estonia">Estonia</option>
+            <option value="Finland">Finland</option>
+            <option value="France">France</option>
+            <option value="Germany">Germany</option>
+            <option value="Greece">Greece</option>
+            <option value="Hungary">Hungary</option>
+            <option value="Ireland">Ireland</option>
+            <option value="Italy">Italy</option>
+            <option value="Latvia">Latvia</option>
+            <option value="Lithuania">Lithuania</option>
+            <option value="Luxembourg">Luxembourg</option>
+            <option value="Malta">Malta</option>
+            <option value="Netherlands">Netherlands</option>
+            <option value="Poland">Poland</option>
+            <option value="Portugal">Portugal</option>
+            <option value="Romania">Romania</option>
+            <option value="Slovakia">Slovakia</option>
+            <option value="Slovenia">Slovenia</option>
+            <option value="Spain">Spain</option>
+            <option value="Sweden">Sweden</option>
+        </select>
+        <br>
+        <label for="summa">Summa</label>
+        <input type="number" id="summa">
+        <br>
+        <label for="currencies">Valuuta</label>
+        <select id="currencies">
+            <option value="€" id="eur">EUR</option>
+            <option value="$">USD</option>
+        </select>
+        <br>
+        <button type="submit" id="submitButton">Sisesta</button>
+        <br><br>
+        <span id="result">siia tuleb tulemus</span>
+    </div>
+</body>
+</html>
