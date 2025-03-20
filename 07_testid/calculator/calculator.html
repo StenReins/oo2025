@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <script>
+        let calcobj = null;
+        let exports = {}
+        function startPage(){
+            calcobj = new Calculator();
+        }
+        function buttonPress(){
+            calcobj.pressButton(event.target.value);
+            Panel1.innerText = calcobj.getPanelContents();
+        }
+    </script>
+</head>
+<body>
+    <h1>Calculator</h1>
+    <span id="field"></span> 
+</body>
+</html>
