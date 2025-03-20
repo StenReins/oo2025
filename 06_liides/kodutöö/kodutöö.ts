@@ -1,22 +1,29 @@
 window.onload = function(){
-    submitEntry()
+    submitEntry();
 }
 
 
 
-interface Payment{
+interface Tax{
     country:string;
     currentAmount:number;
     currency:string;
     addTax():void;
+    debugging();
 }
 
+/*interface Conversion {
+    amount:number
+    EURToUSD();
+    USDToEUR();
+}*/
 
-class addTax implements Payment {
+
+class addTax implements Tax {
     constructor(public country:string, public currentAmount, public currency){
-        this.country = country
-        this.currentAmount = currentAmount
-        this.currency = currency
+        this.country = country;
+        this.currentAmount = currentAmount;
+        this.currency = currency;
     }
     euCountriesVAT = [
         { country: "Austria", vatRate: 20 },
@@ -55,23 +62,23 @@ class addTax implements Payment {
             this.currentAmount = this.currentAmount + this.currentAmount * vatRate
             
             if(this.currency === "$"){
-                const currencyConversion = new CurrencyConversion(this.currentAmount)
-                this.currentAmount = currencyConversion.EURToUSD(this.currentAmount)
+                const currencyConversion = new CurrencyConversion(this.currentAmount);
+                this.currentAmount = currencyConversion.EURToUSD(this.currentAmount);
             }
 
-            this.renderAnswer()
+            this.renderAnswer();
         }
         else{
-            console.log("Riik ei ole Euroopa Liidus")
+            console.log("Riik ei ole Euroopa Liidus");
         }
     }
     renderAnswer(){
-        const result = document.querySelector('#result')
+        const result = document.querySelector('#result');
         result!.innerHTML = `${this.currentAmount.toFixed(2)} ${this.currency}`;
     }
 
     debugging(){
-        console.log(this.country, this.currentAmount, this.currency)
+        console.log(this.country, this.currentAmount, this.currency);
     }
 
 }
@@ -81,30 +88,30 @@ class CurrencyConversion{
         this.amount = amount;
     }
     EURToUSD(amount){
-        const rate = 1.09
-        return amount * rate
+        const rate = 1.09;
+        return amount * rate;
     }
     USDToEUR(amount){
-        const rate = 0.92
-        return amount * rate
+        const rate = 0.92;
+        return amount * rate;
     }
 }
 
 function submitEntry(){
     const submit = document.querySelector('#submitButton');
     submit?.addEventListener('click', () => {
-        const country = document.querySelector<HTMLSelectElement>('#riik');
-        const currentAmount = document.querySelector<HTMLInputElement>('#summa');
-        const currency = document.querySelector<HTMLSelectElement>('#currencies');
+        const country = <HTMLSelectElement>document.querySelector('#riik');
+        const currentAmount = <HTMLInputElement>document.querySelector('#summa');
+        const currency = <HTMLSelectElement>document.querySelector('#currencies');
 
         const countryValue = country?.value!;
         const currentAmountValue = parseFloat(currentAmount?.value!);
-        const currencyValue = currency?.value
+        const currencyValue = currency?.value;
 
 
 
-        const activateScript = new addTax(countryValue, currentAmountValue, currencyValue);
+        const activateScript:Tax = new addTax(countryValue, currentAmountValue, currencyValue);
         activateScript.addTax();
-        activateScript.debugging();
+        //activateScript.debugging();
     });
 }

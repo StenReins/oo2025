@@ -1,6 +1,11 @@
 window.onload = function () {
     submitEntry();
 };
+/*interface Conversion {
+    amount:number
+    EURToUSD();
+    USDToEUR();
+}*/
 class addTax {
     country;
     currentAmount;
@@ -91,6 +96,6 @@ function submitEntry() {
         const currencyValue = currency?.value;
         const activateScript = new addTax(countryValue, currentAmountValue, currencyValue);
         activateScript.addTax();
-        activateScript.debugging();
+        //activateScript.debugging();
     });
 }
