@@ -42,7 +42,7 @@ class Deck { //kaardipakk
 
     shuffle() { 
         const { allCards } = this;
-        for (let i = allCards.length - 1; i > 0; i--) { //shuffle algorithm
+        for (let i = 0; i < allCards.length - 1; i++) { //shuffle algorithm
             const j = Math.floor(Math.random() * (i + 1));
             [allCards[i], allCards[j]] = [allCards[j], allCards[i]];
         }
@@ -59,7 +59,7 @@ class Deck { //kaardipakk
 }
 
 class Hand {  //hand
-    public cards: Card[] 
+    cards: Card[] 
     constructor() {
         this.cards = [];
     }
@@ -69,16 +69,15 @@ class Hand {  //hand
     }
 
     getValues() {
-        let total = 0; //hand value
-        let aces = 0; //how many aces u have
+        let total = 0; 
+        let aces = 0; 
 
-        for (let card of this.cards) { //gets every card value and adds up to a total sum
+        for (let card of this.cards) { 
             let val = card.getValue(); 
             if (val === 11) aces++;
             total += val;
         }
 
-        // for each ace you have and if the value goes over 21, it subtracts 10
         while (total > 21 && aces > 0) {
             total -= 10;
             aces -= 1;
@@ -102,11 +101,11 @@ class Hand {  //hand
 
 //GAME PORTION
 class User{ //Kasutaja, regamine ja logimine, tema andmed
-    protected users: string[];
-    public name: string;
-    public balance: number;
-    public wins: number;
-    public losses: number;
+    users: string[];
+    name: string;
+    balance: number;
+    wins: number;
+    losses: number;
     constructor(name, balance, wins, losses){ //user data
         this.users = JSON.parse(localStorage.getItem('users') || '[]');
         this.name = initialName;
@@ -142,8 +141,8 @@ class User{ //Kasutaja, regamine ja logimine, tema andmed
 }
 
 class Player extends User{ //Kasutaja kui mängijana
-    public hand: Hand;
-    public bet: number;
+    hand: Hand;
+    bet: number;
     constructor(name: string) { //@ts-ignore
         super(name);
         this.hand = new Hand();
@@ -155,7 +154,7 @@ class Player extends User{ //Kasutaja kui mängijana
     }
 
     placeBet(amount) {
-        if(amount > this.balance || amount <=0) return false; //saab kruttida siin min-max beti summat
+        if(amount > this.balance || amount <=0) return false; 
         this.bet = amount;
         this.balance -= amount;
         this.saveUser();
@@ -171,7 +170,6 @@ class Player extends User{ //Kasutaja kui mängijana
     }
 
     push() {
-        // Return bet
         this.balance += this.bet;
         this.bet = 0;
         this.saveUser();
@@ -277,7 +275,7 @@ class BlackjackGame {
         container.appendChild(this.standButton);
     }
 
-    private hidePlayerActions(): void {
+    hidePlayerActions(): void {
         const container = this.uiElements.playerContainer;
         container.innerHTML = '';
         this.hitButton = null;
@@ -348,19 +346,25 @@ class BlackjackGame {
 
         this.isGameActive = false;
         this.updateStats();
-        this.updateUI(true);
+        this.updateUI(true, message);
     }
 
-    updateUI(showDealerCards: boolean = false): void {
+    updateUI(showDealerCards: boolean = false, message = ''): void {
         // Dealer cards display
         if (showDealerCards) {
             this.uiElements.dealerCardsDiv.textContent = this.dealer.hand.toString();
-            this.uiElements.dealerDealsSpan.textContent = `Diiler: ${this.dealer.hand.getValues()}`;
+            this.uiElements.dealerDealsSpan.textContent = message;
         } else {
             if (this.dealer.hand.cards.length > 0) {
                 const firstCard = this.dealer.hand.cards[0].toString();
                 this.uiElements.dealerCardsDiv.textContent = `${firstCard} [??]`;
-                this.uiElements.dealerDealsSpan.textContent = `Diiler:${this.dealer.hand.getValues()}`;
+                if (this.isPlayerTurn){
+                    const visibleValue = this.dealer.hand.cards[0].getValue();
+                    this.uiElements.dealerDealsSpan.textContent = `Diiler: ${visibleValue}`;
+                } else {
+                    this.uiElements.dealerDealsSpan.textContent = `Diiler: ${this.dealer.hand.getValues()}`;
+                }
+                
             } else {
                 this.uiElements.dealerCardsDiv.textContent = '';
                 this.uiElements.dealerDealsSpan.textContent = 'Diiler: x';

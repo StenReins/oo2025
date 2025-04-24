@@ -41,7 +41,7 @@ var Card = /** @class */ (function () {
 var Deck = /** @class */ (function () {
     function Deck() {
         this.suits = ['♠', '♥', '♦', '♣'];
-        this.ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+        this.values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
         this.allCards = [];
         this.initDeck();
         this.shuffle();
@@ -49,16 +49,16 @@ var Deck = /** @class */ (function () {
     Deck.prototype.initDeck = function () {
         for (var _i = 0, _a = this.suits; _i < _a.length; _i++) {
             var suit = _a[_i];
-            for (var _b = 0, _c = this.ranks; _b < _c.length; _b++) {
-                var rank = _c[_b];
-                this.allCards.push(new Card(suit, rank));
+            for (var _b = 0, _c = this.values; _b < _c.length; _b++) {
+                var value = _c[_b];
+                this.allCards.push(new Card(suit, value));
             }
         }
     };
     Deck.prototype.shuffle = function () {
         var _a;
         var allCards = this.allCards;
-        for (var i = allCards.length - 1; i > 0; i--) { //wtf does this do
+        for (var i = 0; i < allCards.length - 1; i++) { //shuffle algorithm
             var j = Math.floor(Math.random() * (i + 1));
             _a = [allCards[j], allCards[i]], allCards[i] = _a[0], allCards[j] = _a[1];
         }
@@ -80,16 +80,15 @@ var Hand = /** @class */ (function () {
         this.cards.push(card);
     };
     Hand.prototype.getValues = function () {
-        var total = 0; //käe summa
-        var aces = 0; //mitu ässa sul on
+        var total = 0;
+        var aces = 0;
         for (var _i = 0, _a = this.cards; _i < _a.length; _i++) {
             var card = _a[_i];
-            var val = card.getValue(); //ühe kaardi väärtus
+            var val = card.getValue();
             if (val === 11)
                 aces++;
             total += val;
         }
-        // kui sul on äss aga summa on suurem kui 21, siis võtab maha
         while (total > 21 && aces > 0) {
             total -= 10;
             aces -= 1;
@@ -119,14 +118,9 @@ var User = /** @class */ (function () {
             this.selectUser();
         }
         else {
-            this.createUser();
+            this.saveUser();
         }
     }
-    User.prototype.createUser = function () {
-        this.users.push(this.name);
-        localStorage.setItem('users', JSON.stringify(this.users));
-        this.saveUser();
-    };
     User.prototype.saveUser = function () {
         var user = {
             balance: this.balance,
@@ -165,15 +159,13 @@ var Player = /** @class */ (function (_super) {
         return true;
     };
     Player.prototype.win = function (betMultiplier) {
-        if (betMultiplier === void 0) { betMultiplier = 2; }
-        // Receive payout (normal 2x bet)
+        // võit
         this.balance += this.bet * betMultiplier;
         this.wins++;
         this.bet = 0;
         this.saveUser();
     };
     Player.prototype.push = function () {
-        // Return bet
         this.balance += this.bet;
         this.bet = 0;
         this.saveUser();
@@ -296,11 +288,11 @@ var BlackjackGame = /** @class */ (function () {
         }
         else if (this.dealer.hand.isBust()) {
             message = 'Diiler läks üle 21, sa võidad!';
-            this.player.win();
+            this.player.win(2);
         }
         else if (this.player.hand.isBlackjack() && !this.dealer.hand.isBlackjack()) {
             message = 'Blackjack! Sa võidad 1.5x panuse.';
-            this.player.win(2.5); // Blackjack pays 3:2, approximated
+            this.player.win(2.5);
         }
         else if (!this.player.hand.isBlackjack() && this.dealer.hand.isBlackjack()) {
             message = 'Diileril on blackjack, sa kaotad!';
@@ -308,7 +300,7 @@ var BlackjackGame = /** @class */ (function () {
         }
         else if (playerValue > dealerValue) {
             message = "Sa v\u00F5idad! Sinu ".concat(playerValue, " > Diileri ").concat(dealerValue);
-            this.player.win();
+            this.player.win(2);
         }
         else if (playerValue < dealerValue) {
             message = "Sa kaotasid! Sinu ".concat(playerValue, " < Diileri ").concat(dealerValue);
@@ -328,26 +320,28 @@ var BlackjackGame = /** @class */ (function () {
         // Dealer cards display
         if (showDealerCards) {
             this.uiElements.dealerCardsDiv.textContent = this.dealer.hand.toString();
-            this.uiElements.dealerDealsSpan.textContent = "Dealer: ".concat(this.dealer.hand.getValues());
+            this.uiElements.dealerDealsSpan.textContent = message;
         }
         else {
             if (this.dealer.hand.cards.length > 0) {
                 var firstCard = this.dealer.hand.cards[0].toString();
                 this.uiElements.dealerCardsDiv.textContent = "".concat(firstCard, " [??]");
-                this.uiElements.dealerDealsSpan.textContent = 'Dealer: ???';
+                if (this.isPlayerTurn) {
+                    var visibleValue = this.dealer.hand.cards[0].getValue();
+                    this.uiElements.dealerDealsSpan.textContent = "Diiler: ".concat(visibleValue);
+                }
+                else {
+                    this.uiElements.dealerDealsSpan.textContent = "Diiler: ".concat(this.dealer.hand.getValues());
+                }
             }
             else {
                 this.uiElements.dealerCardsDiv.textContent = '';
-                this.uiElements.dealerDealsSpan.textContent = 'Dealer: x';
+                this.uiElements.dealerDealsSpan.textContent = 'Diiler: x';
             }
         }
         // Player cards
         this.uiElements.playerCardsDiv.textContent = this.player.hand.toString();
-        this.uiElements.playerCardsDiv.title = "Value: ".concat(this.player.hand.getValues());
-        // Append message if provided
-        if (message) {
-            this.uiElements.dealerDealsSpan.textContent += " - ".concat(message);
-        }
+        this.uiElements.playerCardsDiv.title = "V\u00E4\u00E4rtus: ".concat(this.player.hand.getValues());
     };
     BlackjackGame.prototype.updateStats = function () {
         this.uiElements.userBalanceSpan.textContent = "Kontoseis: ".concat(this.player.balance, " \u20AC");
@@ -355,8 +349,8 @@ var BlackjackGame = /** @class */ (function () {
         this.uiElements.userLossesSpan.textContent = "Kaotused: ".concat(this.player.losses);
     };
     BlackjackGame.prototype.clearUI = function () {
-        this.uiElements.dealerCardsDiv.textContent = "Here it will display dealer's cards";
-        this.uiElements.playerCardsDiv.textContent = "Here it will display the player's cards";
+        this.uiElements.dealerCardsDiv.textContent = "Siin näidatakse diileri kaarte";
+        this.uiElements.playerCardsDiv.textContent = "Siin näidatakse mängija kaarte";
         this.uiElements.dealerDealsSpan.textContent = 'Dealer: x';
         this.hidePlayerActions();
     };

@@ -1,7 +1,8 @@
 /* Body styling */
 body {
-font-family: Arial, sans-serif;
-background-color: #f0f2f5;
+font-family: 'Noto Sans';
+background: #008f07;
+background: linear-gradient(0deg, rgba(0, 143, 7, 1) 0%, rgba(1, 61, 13, 1) 100%);
 color: #333;
 line-height: 1.6;
 padding: 20px;
@@ -9,8 +10,14 @@ padding: 20px;
 
 /* Heading style */
 h1 {
-text-align: center;
-margin-bottom: 20px;
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+
+}
+
+.dealerContainer, .dealerCards, .playerCards, .playerContainer{
+    box-shadow: 2px 5px 5px rgb(91, 91, 91);
 }
 
 /* Main container */
@@ -91,4 +98,20 @@ align-items: center;
 .userStats span {
 margin: 10px 0;
 }
+}
+
+.buttonContainer{
+    position:relative;
+}
+
+.startBtn{
+    margin-left:45%;
+    width:100px;
+    font-size: 15px;
+    font-weight: bold;
+    display:inline-block;
+    color:white;
+    background: #008f07;
+    background: linear-gradient(0deg, rgba(0, 143, 7, 1) 0%, rgba(1, 61, 13, 1) 100%);
+    border-radius: 10px;
 }
