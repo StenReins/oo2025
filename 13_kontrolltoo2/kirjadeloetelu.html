@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kirjad</title>
+    <script src="kirjadeloetelu_3.js" defer></script>
+</head>
+<body>
+    <h1>Lisa kiri</h1>
+    <form>
+        <label for="title">Pealkiri</label>
+        <input type="text" id="title" name="Pealkiri"><br>
+        <label for="text">Sisu</label>
+        <input type="text" id="text" name="Sisu">
+        <label for="refs">Viited koodina</label>
+        <select name="refs" id="refs" multiple>
+            <option value="">Pole</option>
+            <!--Siia tulevad kõik olemasolevad viited-->
+        </select>
+    </form>
+    <input type="submit" id="submit">Salvesta</input>
+    <canvas id="canvas" width="1000" height="1000"></canvas>
+</body>
+</html>
