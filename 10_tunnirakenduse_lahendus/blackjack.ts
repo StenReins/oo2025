@@ -121,7 +121,7 @@ class User{ //Kasutaja, regamine ja logimine, tema andmed
         }
     }
 
-    saveUser(){ //ka konto loomisel kasutatav?
+    saveUser(){ 
         let user = {
             balance: this.balance,
             wins: this.wins,
@@ -322,25 +322,25 @@ class BlackjackGame {
         let message = '';
 
         if (this.player.hand.isBust()) {
-            message = 'Sa kaotasid! Sa läksid üle 21.';
+            message = 'You lost! You went over 21.';
             this.player.lose();
         } else if (this.dealer.hand.isBust()) {
-            message = 'Diiler läks üle 21, sa võidad!';
+            message = 'You won! Dealer went over 21.';
             this.player.win(2);
         } else if (this.player.hand.isBlackjack() && !this.dealer.hand.isBlackjack()) {
-            message = 'Blackjack! Sa võidad 1.5x panuse.';
+            message = 'Blackjack! You win 1.5x more!';
             this.player.win(2.5);
         } else if (!this.player.hand.isBlackjack() && this.dealer.hand.isBlackjack()) {
-            message = 'Diileril on blackjack, sa kaotad!';
+            message = 'Dealer has a blackjack! You lost.';
             this.player.lose();
         } else if (playerValue > dealerValue) {
-            message = `Sa võidad! Sinu ${playerValue} > Diileri ${dealerValue}`;
+            message = `You won! Your ${playerValue} > Dealer's ${dealerValue}`;
             this.player.win(2);
         } else if (playerValue < dealerValue) {
-            message = `Sa kaotasid! Sinu ${playerValue} < Diileri ${dealerValue}`;
+            message = `You lost! Your ${playerValue} < Dealer's ${dealerValue}`;
             this.player.lose();
         } else {
-            message = `Viik! Mõlemad ${playerValue}. Panus tagastatud.`;
+            message = `Draw! Both have ${playerValue}.`;
             this.player.push();
         }
 
@@ -360,9 +360,9 @@ class BlackjackGame {
                 this.uiElements.dealerCardsDiv.textContent = `${firstCard} [??]`;
                 if (this.isPlayerTurn){
                     const visibleValue = this.dealer.hand.cards[0].getValue();
-                    this.uiElements.dealerDealsSpan.textContent = `Diiler: ${visibleValue}`;
+                    this.uiElements.dealerDealsSpan.textContent = `Dealer: ${visibleValue}`;
                 } else {
-                    this.uiElements.dealerDealsSpan.textContent = `Diiler: ${this.dealer.hand.getValues()}`;
+                    this.uiElements.dealerDealsSpan.textContent = `Dealer: ${this.dealer.hand.getValues()}`;
                 }
                 
             } else {
@@ -373,18 +373,18 @@ class BlackjackGame {
 
         // Player cards
         this.uiElements.playerCardsDiv.textContent = this.player.hand.toString();
-        this.uiElements.playerCardsDiv.title = `Väärtus: ${this.player.hand.getValues()}`;
+        this.uiElements.playerCardsDiv.title = `Value: ${this.player.hand.getValues()}`;
     }
 
     updateStats(): void {
-        this.uiElements.userBalanceSpan.textContent = `Kontoseis: ${this.player.balance} €`;
-        this.uiElements.userWinsSpan.textContent = `Võidud: ${this.player.wins}`;
-        this.uiElements.userLossesSpan.textContent = `Kaotused: ${this.player.losses}`;
+        this.uiElements.userBalanceSpan.textContent = `Balance: ${this.player.balance} €`;
+        this.uiElements.userWinsSpan.textContent = `Wins: ${this.player.wins}`;
+        this.uiElements.userLossesSpan.textContent = `Losses: ${this.player.losses}`;
     }
 
     clearUI(): void {
-        this.uiElements.dealerCardsDiv.textContent = "Siin näidatakse diileri kaarte";
-        this.uiElements.playerCardsDiv.textContent = "Siin näidatakse mängija kaarte";
+        this.uiElements.dealerCardsDiv.textContent = "";
+        this.uiElements.playerCardsDiv.textContent = "";
         this.uiElements.dealerDealsSpan.textContent = 'Dealer: x';
         this.hidePlayerActions();
     }

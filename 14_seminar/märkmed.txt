@@ -1,0 +1,16 @@
+* Typescripti/Java kasutusvaldkonnad, käivitamise moodused
+    * Typescript - Javascript, aga peab määrama tüüpe muutujatele. Hea, kuna annab compileimisel veateateid, aga JS ei anna.
+
+Andmetüübid - string, number, boolean, oma tehtud klassid, massiivid (string[], number[]), any, void
+
+Masiivid - push, map (koostab uue masiivi etteantud massiivist callback functionit kasutades), filter (filtreerib antud )
+
+Veaolukorrad - try, catch. Stacktrace, suudab püüda muudest kohtadest veateate kinni.
+
+Obj. orienteeritud progrm. - Organiseeritud, staatiline.
+Staatilised funktsioonide kasutamine klassina - saab hoida funktsioone ühes kohas struktureeritult.
+
+Staatilised ja isendimuutujad ning meetodid - staatilised kuuluvad klassile või saavad olla väljaspool klassi, isendimuutujad kuuluvad iga objekti külge (constructoris nt.). Isendimuutujad - auto andmed, staatilised muutujad - autode arv
+
+Liidesed - aitavad organiseerida klasside struktuuri.
+Nende kasutamine komponentide omavahel asendamiseks - 

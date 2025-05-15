@@ -1,1 +1,17 @@
 Märkmed seminari teemadel
+
+Kordamisküsimused õppeaines Objektorienteeritud programmeerimine kevadsemestril 2025
+
+* Typescripti/Java kasutusvaldkonnad, käivitamise moodused
+* Typescripti/Java andmetüübid
+* Typescripti/Java massiivide/listide loomine ja kasutamine
+* Veaolukorrad ja nende haldamine - MINA
+
+* Objektorienteerituse head ning tülikad küljed
+* Klassi kasutamine staatiliste funktsioonide kogumikuna (moodulina)
+* Andmeid sisaldava klassi eksemplari kasutamine Isikukoodi näitel
+* Andmete muutmist lubava klassi eksemplari kasutamine koordinaatidega kilpkonna näitel
+* Objektide massiivi loomine ja kasutamine
+* Staatilised ja isendimuutujad ning meetodid
+
+* Liideste kasutamine

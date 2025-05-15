@@ -1,36 +1,49 @@
-var Calculator = /** @class */ (function () {
-    function Calculator() {
-        this.calculationField = document.querySelector('#calculationField');
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TodoManager = void 0;
+var TodoManager = /** @class */ (function () {
+    function TodoManager(name) {
+        this.name = name;
+        this.name = name;
+        this.entries = [];
+        this.ids = [];
     }
-    Calculator.prototype.add = function (event) {
-        if (event) {
-            this.calculationField.innerHTML += event.target.value;
+    TodoManager.prototype.add = function (text) {
+        var id = 0;
+        var entry = {
+            id: id,
+            name: this.name,
+            text: text,
+            tehtud: false
+        };
+        while (this.ids.includes(id)) {
+            id++;
         }
+        this.entries.push(entry);
+        this.ids.push(id);
+        return 'Task lisatud';
     };
-    ;
-    Calculator.prototype.calculate = function () {
-        var _a;
-        if (((_a = this.calculationField) === null || _a === void 0 ? void 0 : _a.innerHTML.length) == 0) {
-            return "";
+    TodoManager.prototype.remove = function (id) {
+        for (var i = 0; i < this.ids.length; i++) {
+            if (id == this.ids[i]) {
+                this.entries.splice(i, 1);
+                this.ids.splice(i, 1);
+                return 'Task kustutatud';
+            }
         }
-        else {
-            var result = parseInt(this.calculationField.innerHTML);
-            return result;
-        }
+        return 'Taski ei leitud';
     };
-    return Calculator;
+    TodoManager.prototype.toggle = function (id) {
+        var entry = this.entries.find(function (e) { return e.id == id; });
+        if (entry) {
+            entry.tehtud = !entry.tehtud;
+            return true;
+        }
+        return false;
+    };
+    TodoManager.prototype.getEntries = function () {
+        return this.entries;
+    };
+    return TodoManager;
 }());
-var calc = new Calculator();
-var math_symbols = document.querySelectorAll('.math-symbol');
-window.onload = function () {
-    var _a, _b;
-    for (var i = 0; i < 10; i++) {
-        (_a = document.querySelector("#number-".concat(i))) === null || _a === void 0 ? void 0 : _a.addEventListener('click', calc.add);
-    }
-    for (var i = 0; i < math_symbols.length; i++) {
-        math_symbols[i].addEventListener('click', calc.add);
-    }
-    (_b = document.querySelector('#equals')) === null || _b === void 0 ? void 0 : _b.addEventListener('submit', function () {
-        document.querySelector('#calculationField').innerHTML = calc.calculate().toString();
-    });
-};
+exports.TodoManager = TodoManager;

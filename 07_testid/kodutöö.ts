@@ -1,33 +1,52 @@
-class Calculator{
-    calculationField = document.querySelector('#calculationField')!;
+export class TodoManager {
+    entries: any[];
+    ids: number[];
+    constructor(protected name:string){
+        this.name = name
+        this.entries = []
+        this.ids = []
+    }
 
-    
-    add(event){
-        if(event){
-            this.calculationField.innerHTML += event.target.value;
-        }
-    };
-    calculate(){
-        if(this.calculationField?.innerHTML.length == 0){
-            return ""
-        }
-        else{
-            let result = parseInt(this.calculationField.innerHTML);
-            return result
-        }
-    }
-}
 
-let calc = new Calculator()
-let math_symbols = document.querySelectorAll('.math-symbol');
-window.onload = function(){
-    for(let i = 0; i<10; i++){
-        document.querySelector(`#number-${i}`)?.addEventListener('click', calc.add);
+    add(text){
+        let id = 0
+        let entry = {
+            id: id,
+            name: this.name,
+            text: text,
+            tehtud: false
+        }
+
+        while(this.ids.includes(id)){
+            id++;
+        }
+
+        this.entries.push(entry)
+        this.ids.push(id)
+        return 'Task lisatud';
     }
-    for(let i = 0; i < math_symbols.length; i++){
-        math_symbols[i].addEventListener('click', calc.add)
+
+    remove(id){
+        for(let i = 0; i < this.ids.length; i++){
+            if(id == this.ids[i]){
+                this.entries.splice(i, 1);
+                this.ids.splice(i, 1);
+                return 'Task kustutatud'
+            }
+        }
+        return 'Taski ei leitud'
     }
-    document.querySelector('#equals')?.addEventListener('submit', () => {
-        document.querySelector('#calculationField')!.innerHTML = calc.calculate().toString()
-    });
+
+    toggle(id){
+        const entry = this.entries.find(e => e.id == id);
+        if(entry){
+            entry.tehtud = !entry.tehtud;
+            return true;
+        }
+        return false;
+    }
+
+    getEntries(){
+        return this.entries;
+    }
 }

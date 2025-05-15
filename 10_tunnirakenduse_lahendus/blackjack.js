@@ -283,31 +283,31 @@ var BlackjackGame = /** @class */ (function () {
         var dealerValue = this.dealer.hand.getValues();
         var message = '';
         if (this.player.hand.isBust()) {
-            message = 'Sa kaotasid! Sa läksid üle 21.';
+            message = 'You lost! You went over 21.';
             this.player.lose();
         }
         else if (this.dealer.hand.isBust()) {
-            message = 'Diiler läks üle 21, sa võidad!';
+            message = 'You won! Dealer went over 21.';
             this.player.win(2);
         }
         else if (this.player.hand.isBlackjack() && !this.dealer.hand.isBlackjack()) {
-            message = 'Blackjack! Sa võidad 1.5x panuse.';
+            message = 'Blackjack! You win 1.5x more!';
             this.player.win(2.5);
         }
         else if (!this.player.hand.isBlackjack() && this.dealer.hand.isBlackjack()) {
-            message = 'Diileril on blackjack, sa kaotad!';
+            message = 'Dealer has a blackjack! You lost.';
             this.player.lose();
         }
         else if (playerValue > dealerValue) {
-            message = "Sa v\u00F5idad! Sinu ".concat(playerValue, " > Diileri ").concat(dealerValue);
+            message = "You won! Your ".concat(playerValue, " > Dealer's ").concat(dealerValue);
             this.player.win(2);
         }
         else if (playerValue < dealerValue) {
-            message = "Sa kaotasid! Sinu ".concat(playerValue, " < Diileri ").concat(dealerValue);
+            message = "You lost! Your ".concat(playerValue, " < Dealer's ").concat(dealerValue);
             this.player.lose();
         }
         else {
-            message = "Viik! M\u00F5lemad ".concat(playerValue, ". Panus tagastatud.");
+            message = "Draw! Both have ".concat(playerValue, ".");
             this.player.push();
         }
         this.isGameActive = false;
@@ -328,10 +328,10 @@ var BlackjackGame = /** @class */ (function () {
                 this.uiElements.dealerCardsDiv.textContent = "".concat(firstCard, " [??]");
                 if (this.isPlayerTurn) {
                     var visibleValue = this.dealer.hand.cards[0].getValue();
-                    this.uiElements.dealerDealsSpan.textContent = "Diiler: ".concat(visibleValue);
+                    this.uiElements.dealerDealsSpan.textContent = "Dealer: ".concat(visibleValue);
                 }
                 else {
-                    this.uiElements.dealerDealsSpan.textContent = "Diiler: ".concat(this.dealer.hand.getValues());
+                    this.uiElements.dealerDealsSpan.textContent = "Dealer: ".concat(this.dealer.hand.getValues());
                 }
             }
             else {
@@ -341,16 +341,16 @@ var BlackjackGame = /** @class */ (function () {
         }
         // Player cards
         this.uiElements.playerCardsDiv.textContent = this.player.hand.toString();
-        this.uiElements.playerCardsDiv.title = "V\u00E4\u00E4rtus: ".concat(this.player.hand.getValues());
+        this.uiElements.playerCardsDiv.title = "Value: ".concat(this.player.hand.getValues());
     };
     BlackjackGame.prototype.updateStats = function () {
-        this.uiElements.userBalanceSpan.textContent = "Kontoseis: ".concat(this.player.balance, " \u20AC");
-        this.uiElements.userWinsSpan.textContent = "V\u00F5idud: ".concat(this.player.wins);
-        this.uiElements.userLossesSpan.textContent = "Kaotused: ".concat(this.player.losses);
+        this.uiElements.userBalanceSpan.textContent = "Balance: ".concat(this.player.balance, " \u20AC");
+        this.uiElements.userWinsSpan.textContent = "Wins: ".concat(this.player.wins);
+        this.uiElements.userLossesSpan.textContent = "Losses: ".concat(this.player.losses);
     };
     BlackjackGame.prototype.clearUI = function () {
-        this.uiElements.dealerCardsDiv.textContent = "Siin näidatakse diileri kaarte";
-        this.uiElements.playerCardsDiv.textContent = "Siin näidatakse mängija kaarte";
+        this.uiElements.dealerCardsDiv.textContent = "";
+        this.uiElements.playerCardsDiv.textContent = "";
         this.uiElements.dealerDealsSpan.textContent = 'Dealer: x';
         this.hidePlayerActions();
     };

@@ -56,17 +56,17 @@ background-color: #fafafa;
 
 /* You could add some descriptive text for each container */
 .dealerCards::before {
-content: "Diileri kaardid: ";
+content: "Dealer's cards: ";
 font-weight: bold;
 }
 
 .playerCards::before {
-content: "Sinu kaardid: ";
+content: "Your cards: ";
 font-weight: bold;
 }
 
 .playerContainer::before {
-content: "Käigud: ";
+content: "Moves: ";
 font-weight: bold;
 }
 
